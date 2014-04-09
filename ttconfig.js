@@ -240,7 +240,7 @@
 			td = td.join("");
 
 			var tpl = '\
-				<table class="table table-striped" tt="table/list">\
+				<table class="table table-striped table-hover" tt="table/list">\
 			        <thead>\
 			          <tr>\
 			          	@th\
