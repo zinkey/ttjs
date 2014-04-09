@@ -256,7 +256,7 @@
 			td = td.join("");
 
 			var tpl = '\
-				<table class="table" tt="table/list">\
+				<table class="table table-striped" tt="table/list">\
 			        <thead>\
 			          <tr>\
 			          	@th\
