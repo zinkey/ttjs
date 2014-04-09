@@ -24,27 +24,6 @@
 		});
 	}
 	
-	var scriptmap = {};
-
-	function getScript(src,str,callback) {
-		if (window[str]){
-			callback();
-		}
-		else{
-			if (scriptmap[src]){
-				scriptmap[src].push(callback);
-			}
-			else{
-				scriptmap[src] = [callback];
-				$.getScript(src,function() {
-					for (var i=0;i<scriptmap[src].length;i++){
-						scriptmap[src][i]();
-					}
-					scriptmap[src] = null;
-				});
-			}
-		}
-	}
 
 	var num = 0;
 
@@ -67,6 +46,11 @@
 					}
 				});
 			});
+
+			seajs.use("http://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css");
+
+			//seajs.use("https://a.alipayobjects.com/alice/one/1.1.0/one.css");
+
 		},
 
 		"tmpl/mustache":function(done,params) {

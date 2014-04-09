@@ -3,13 +3,11 @@
 <head>
 	<meta charset="utf-8">
   	<title>tt.js</title>
+	<script src="tt.js"></script>
+</head>
+<body tt="auto">
 
-  	<link media="all" href="https://a.alipayobjects.com/alice/one/1.1.0/one.css" rel="stylesheet">
-
-
-  	<link href="http://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-
-  	<style>
+	<style>
   		body{
   			margin:30px;
   			font-size:20px;
@@ -26,10 +24,6 @@
   			margin:50px 0 5px 0;
   		}
   	</style>
-
-	<script src="tt.js"></script>
-</head>
-<body tt="auto">
 	
 	<h1>tt.js -_- t-tJavaScript</h1>
 	<div>
@@ -177,55 +171,51 @@
 
 </body>
 
+
 <script src="ttconfig.js"></script>
 
 <script>
+	ttconfig({
 
+		"data/like":function(done) {
 
-ttconfig({
+			var data = {
+				list:[
+					{
+						name:"lucy",
+						like:"iphone"
+					},
+					{
+						name:"lily",
+						like:"ipad"
+					},
+					{
+						name:"jack",
+						like:"mac"
+					}
+				]
+			};
+			done(data);
+		},
+		"custome/hover":function(done) {
 
+			$(this).mouseenter(function() {
+				$(this).css("background","yellow");
+			}).mouseout(function() {
+				$(this).css("background","white");
+			});
+			done();
 
-	"data/like":function(done) {
-
-		var data = {
-			list:[
-				{
-					name:"lucy",
-					like:"iphone"
-				},
-				{
-					name:"lily",
-					like:"ipad"
-				},
-				{
-					name:"jack",
-					like:"mac"
-				}
-			]
-		};
-
-		done(data);
-		
-	},
-	"custome/hover":function(done) {
-
-		$(this).mouseenter(function() {
-			$(this).css("background","yellow");
-		}).mouseout(function() {
-			$(this).css("background","white");
-		});
-		done();
-
-	}
-});
+		}
+	});
+</script>
 
 
 
+<script>
 tt(document.body,function(){
 	
 });
-
-
 </script>
 
 </html>
