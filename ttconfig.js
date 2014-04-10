@@ -10,7 +10,7 @@
 		document.write('<script src="http://static.alipayobjects.com/seajs/??seajs/2.1.1/sea.js,seajs-combo/1.0.0/seajs-combo.js,seajs-style/1.0.0/seajs-style.js"></script>');
 	}
 
-	document.body.setAttribute("ng-app","");
+	//document.body.setAttribute("ng-app","");
 	if (typeof angular == "undefined"){
 		document.write('<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>');
 	}
@@ -200,21 +200,24 @@
 		},
 		*/
 
-		"angular/input":function(done) {
+		"angular/origin":function(done,params) {
+
+			params = params||[];
+			var scope = params[0]||{};
+			
 			
 			var controller = "controller"+(num++);
 			
-			window[controller] = function() {};
+			this.setAttribute("ng-controller",controller);
 
+			angular.module('angulareasy', [])
+			  .controller(controller, function($scope) {
+			    for (var key in scope){
+			    	$scope[key] = scope[key];
+			    }
+			});
+			angular.bootstrap(this, ['angulareasy']);
 
-			$(this).attr("ng-controller",controller);
-
-
-		
-
-			$("input",$(this)).each(function(index,item) {
-				$(item).attr("ng-model",$(item).attr("name"));
-			})
 			done();
 		},
 
@@ -228,16 +231,23 @@
 
 			var list = table.split(",");
 
-			var th = [];
-			var td = [];
+			var colsList = [];
+			var rowsList = [];
 
 			for (var i=0;i<list.length;i++){
 				var array = list[i].match(/(.*?)\(\s*([^\s]*)\s*\)/);
-				th.push("<th>",array[1],"</th>");
-				td.push("<td>{{",array[2],"}}</td>");
+				colsList.push(array[1]);
+				rowsList.push(array[2]);
 			}
-			th = th.join("");
-			td = td.join("");
+			
+			
+			done({
+				list:data.result.resultList,
+				colsList:colsList,
+				rowsList:rowsList
+			});
+
+			/*
 
 			var tpl = '\
 				<table class="table table-striped table-hover" tt="table/list">\
@@ -263,6 +273,10 @@
 			});
 		
 			$(this).html(html);
+
+			*/
+
+			
 
 		},
 

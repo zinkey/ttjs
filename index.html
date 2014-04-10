@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
   	<title>tt.js</title>
-	<script src="tt.js"></script>
+
 </head>
 <body tt="auto">
 
@@ -42,16 +42,36 @@
 
 	<h2 id="#use">采用示例配置"<a href="ttconfig.js">ttconfig.js</a>"的一些例子</h2>
 
+
+
+
+
 	<h3>1.arale日历</h3>
-	 <input type="text" placeholder="date" tt="arale/calendar" />
+	<input type="text" placeholder="date" tt="arale/calendar">
+
+	
+	
+
+
+
+
+
 
 	<h3>2.arale下拉框</h3>
 	        
-	<select name="city" tt="arale/select" id="city">
+	<select name="city" tt="arale/select">
 		<option value="value1">iphone</option>
 		<option value="value2">ipad</option>
 		<option value="value3">mac</option>
 	</select>
+
+
+
+
+
+
+
+
 
 
 	<h3>3.arale提示框</h3>
@@ -59,43 +79,40 @@
 		<u tt="arale/tip" content="tip content">this is a tip</u>
 	</p>
 
+	
+
+
+
+
+
+
+
+
 	<h3>4.arale弹窗框</h3>
 	<p>
 		<button tt="arale/dialog" content="./iframe.html">open a dialog</button>
 	</p>
 
 
-	
+
+
+
+
+
+
+
+
+
 	<h3>5.用户自定义hover效果</h3>
 	<div tt="custome/hover">this is a custome example - custome/hover</div>
 
 
-	<!--
-	<h3>6.表单验证</h3>
-	
-	<form class="ui-form" tt="arale/validator">
-	    <div class="ui-form-item">
-	        <label for="username" class="ui-label"><span class="ui-form-required">*</span>用户名：</label>
-	        <input id="username" name="username" class="ui-input" />
-	        <div class="ui-form-explain">用户名为电子邮箱。</div>
-	    </div>
 
-	    <div class="ui-form-item ui-form-item-error">
-	        <label for="password" class="ui-label"><span class="ui-form-required">*</span>密码：</label>
-	        <input id="password" name="password" type="password" class="ui-input" />
-	        <div class="ui-form-explain">密码的长度必须大于或等于5。</div>
-	    </div>
 
-	    <div class="ui-form-item">
-	        <label for="password-confirmation" class="ui-label"><span class="ui-form-required">*</span>重复输入密码：</label>
-	        <input id="password-confirmation" name="password-confirmation" type="password" class="ui-input" />
-	    </div>
 
-	    <div class="ui-form-item">
-	        <input class="ui-button ui-button-morange" value="确定" type="submit">
-	    </div>
-	</form>
-	-->
+
+
+
 
 	<h3>6.mustache模板</h3>
 
@@ -115,65 +132,74 @@
 
 
 
-	<h3>7.angular input</h3>
-
-
-	<div tt="angular/input">
-	  <div>-----</div>
-	  <div>No.1</div>
-      <label>FirstName:</label>
-      <input type="text" placeholder="Enter here" name="FirstName">
-      <br>
-      <label>LastName:</label>
-      <input type="text" placeholder="Enter here" name="LastName">
-      <br>
-      Hello {{FirstName}} {{LastName}}!
-    </div>
 
 
 
-    <div tt="angular/input">
-      <div>-----</div>
-      <div>No.2</div>
-      <label>FirstName:</label>
-      <input type="text" placeholder="Enter here" name="FirstName">
-      <br>
-      <label>LastName:</label>
-      <input type="text" placeholder="Enter here" name="LastName">
-      <br>
-      Hello {{FirstName}} {{LastName}}!
-    </div>
 
-    <div>
-    	{{name}}
-    </div>
-   
+
+
+
+
+	<h3>7.angular origin</h3>
+
+	<div tt="data/like,angular/origin" id="a">
+
+		<ul>
+			<li ng-repeat="item in list">{{item.name}} : {{item.like}}
+				 <input type="text" ng-model="item.like">
+			</li>
+		</ul>
+
+	</div>
+
+
+
+
+
+
+
+
 
 
     <h2>业务组件</h2>
 
-    <h3>8.table list</h3>
+    <h3>8.table</h3>
    
-    <div tt="data/easydata,table/easytable" table="
-    	ID(id),
-    	责任人(responsibleMan),
-    	处理时间(dealTime),
-    	一级类目(catOne),
-    	二级类目(catTwo),
-    	三级类目(catThree),
-    	案件号(caseNo)
-    " url="list.json">
+    <table class="table table-striped table-hover" 
+    	tt="data/easydata,table/easytable,angular/origin" table="
+	    	ID(id),
+	    	责任人(responsibleMan),
+	    	处理时间(dealTime),
+	    	一级类目(catOne),
+	    	二级类目(catTwo),
+	    	三级类目(catThree),
+	    	案件号(caseNo)" 
+	    url="list.json">
 
-    </div>
+		<thead>
+			<th nowrap="nowrap" ng-repeat="item in colsList track by $index">
+				{{item}}
+			</th>
+		</thead>
+
+		<tbody>
+			<tr ng-repeat="item in list track by $index">
+				<td nowrap="nowrap" ng-repeat="col in rowsList">
+					{{item[col]}}
+				</td>
+			</tr>
+		</tbody>
+
+	</table>
+
 
 
 
 
 </body>
 
-
+<script src="tt.js"></script>
 <script src="ttconfig.js"></script>
-
 <script>
 	ttconfig({
 
@@ -194,6 +220,11 @@
 						like:"mac"
 					}
 				]
+				/*,
+				p:function(){
+					this.number = 100;
+				}
+				*/
 			};
 			done(data);
 		},
@@ -211,11 +242,14 @@
 </script>
 
 
-
 <script>
 tt(document.body,function(){
 	
+	tt($("#a")[0],function(s){
+		
+	});
 });
 </script>
+
 
 </html>

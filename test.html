@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
+<body>
+
+
+
+<div id="a">
+  {{greeting}}
+</div>
+
+{{greeting}}
+ 
+
+<script>
+// ng-controller="WelcomeController"
+	document.getElementById("a").setAttribute("ng-controller","WelcomeController");
+
+  var app = angular.module('demo', [])
+  .controller('WelcomeController', function($scope) {
+      $scope.greeting = 'Welcome!';
+  });
+  angular.bootstrap(document.getElementById("a"), ['demo']);
+</script>
+</body>
+</html>
